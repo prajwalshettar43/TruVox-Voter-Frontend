@@ -62,23 +62,16 @@ const VotePage = ({ epicId, setEpicId }) => {
 const isToday = (dateStr) => {
   if (!dateStr) return false;
 
-  // 1. Get today's local date as "YYYY-MM-DD"
   const localToday = new Date().toLocaleDateString("en-CA"); 
-
-  // 2. Normalize the incoming date string
   let formattedElectionDate;
 
   if (dateStr.includes("/")) {
-    // Handles formats like "03/07/2026" from production
-    // Parses it to a Date object, then formats it to match "YYYY-MM-DD"
     const d = new Date(dateStr);
     formattedElectionDate = d.toLocaleDateString("en-CA");
   } else {
-    // Handles formats like "2026-03-07" or "2026-03-07T18:30:00Z" from local
     formattedElectionDate = dateStr.split("T")[0];
   }
 
-  // 3. Compare the strings safely
   return localToday === formattedElectionDate;
 };
 
@@ -193,7 +186,7 @@ const isToday = (dateStr) => {
               <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                 Election Portal
               </h2>
-              <p className="text-sm text-gray-400">Secure Blockchain Voting</p>
+              <p className="text-sm text-gray-400">You can only vote for elections held today!!</p>
             </div>
           </div>
           <div className="flex items-center gap-4">
