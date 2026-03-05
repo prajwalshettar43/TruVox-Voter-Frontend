@@ -129,7 +129,7 @@ const FaceVerification = ({ epicId, setEpicId }) => {
       formData.append('epic', userId);
       formData.append('photo', selectedImage, 'verification_image.jpg');
 
-      const response = await fetch('http://localhost:8000/verify', {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/verify`, {
         method: 'POST',
         body: formData,
       });
@@ -150,7 +150,7 @@ const FaceVerification = ({ epicId, setEpicId }) => {
           const securityMessage = `SECURITY ALERT: An unauthorized person attempted to log in using EPIC ID '${userId}' at Booth 0710. Identity verification failed.`;
 
           // Send to backend
-          fetch('http://localhost:8000/log-message', {
+          fetch(`${import.meta.env.VITE_API_BASE_URL}/log-message`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ message: securityMessage })

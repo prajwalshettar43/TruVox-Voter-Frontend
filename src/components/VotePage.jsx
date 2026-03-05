@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 
 // ✅ CONFIGURATION
-const API_BASE_URL = "http://localhost:8000"; 
+const API_BASE_URL = `${import.meta.env.VITE_API_BASE_URL}`; 
 const IMG_PLACEHOLDER_SVG = "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png";
 
 const VotePage = ({ epicId, setEpicId }) => {
