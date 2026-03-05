@@ -59,15 +59,23 @@ const VotePage = ({ epicId, setEpicId }) => {
     fetchElections();
   }, []);
 
-  const isToday = (dateStr) => {
-    const today = new Date();
-    const date = new Date(dateStr);
-    return (
-      date.getDate() === today.getDate() &&
-      date.getMonth() === today.getMonth() &&
-      date.getFullYear() === today.getFullYear()
-    );
-  };
+const isToday = (dateStr) => {
+  if (!dateStr) return false;
+
+  // 1. Get today's local date as a clean "YYYY-MM-DD" string
+  const today = new Date();
+  
+  // toLocaleDateString("en-CA") reliably outputs "YYYY-MM-DD" 
+  // based on the user's local browser timezone
+  const localToday = today.toLocaleDateString("en-CA"); 
+
+  // 2. Extract the "YYYY-MM-DD" part from the election date string
+  // This works whether the string is "2024-10-25" or "2024-10-25T18:30:00Z"
+  const electionDate = dateStr.split("T")[0]; 
+
+  // 3. Compare the raw strings
+  return localToday === electionDate;
+};
 
   const getCandidateImage = (candidate) => {
     const path = candidate.photo_url || candidate.symbol_url;
